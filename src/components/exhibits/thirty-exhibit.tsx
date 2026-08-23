@@ -4,32 +4,29 @@ import { Button } from "@/components/ui/button";
 import { useVisitStore } from "@/lib/visit-store";
 
 const ITEMS = [
-  { id: "test", label: "Test and discharge" },
-  { id: "read", label: "Match procedure to the panel" },
-  { id: "work", label: "The work itself" },
-  { id: "report", label: "Report" },
-  { id: "idle", label: "Slack" },
+  { id: "test", label: "検電・放電" },
+  { id: "read", label: "手順と盤の突き合わせ" },
+  { id: "work", label: "実作業" },
+  { id: "report", label: "報告" },
+  { id: "idle", label: "余白" },
 ] as const;
 
 type Id = (typeof ITEMS)[number]["id"];
 
 function story(alloc: Record<Id, number>) {
   const lines: string[] = [];
-  if (alloc.test < 8) lines.push("Testing is short. Backup stays silent unless you measure it.");
-  else lines.push("You spent time on testing. It collides with the finish-today weather.");
-  if (alloc.read < 5) lines.push("You skipped the unreadable paper. The addressee is still unknown.");
-  else lines.push("You tried to read the paper. Deciphering burns the clock; the work is squeezed.");
-  if (alloc.work <= 8) lines.push("Hands-on time is short. You can wear a “done already” face.");
-  else lines.push("You stretched the work carefully. Not finishing stays possible.");
+  if (alloc.test < 8) lines.push("検電が短い。予備系は、測らなければ沈黙する。");
+  else lines.push("検電に時間を割いた。今日中の空気と衝突する。");
+  if (alloc.read < 5) lines.push("読めない紙を飛ばした。宛先はまだ不明のまま。");
+  else lines.push("紙を読もうとした。判読に時間を溶かし、作業が圧迫される。");
+  if (alloc.work <= 8) lines.push("実作業は短い。「もう終わった」顔ができる。");
+  else lines.push("実作業を丁寧に伸ばした。終わらない可能性が残る。");
   if (alloc.idle >= 10 && alloc.work <= 8)
-    lines.push(
-      "Slack tops ten. Some people needle others. Some rest. Some check again. Slack amplifies temperament.",
-    );
-  else if (alloc.idle >= 10) lines.push("There is slack, but work remains. This is not idle.");
-  else lines.push("No slack. Care and sloppiness both spill outside the window.");
-  if (alloc.report >= 6)
-    lines.push("The report is thick. Even if the inside is thin, the shape of “shared” is tidy.");
-  else lines.push("The report is short. The field is detailed; official language likes one line.");
+    lines.push("余白が十を超える。煽る人もいる。休み直す人もいる。再確認する人もいる。余白は性格を増幅する。");
+  else if (alloc.idle >= 10) lines.push("余白はあるが、作業も残っている。暇ではない。");
+  else lines.push("余白が無い。丁寧さも雑さも、枠の外に溢れる。");
+  if (alloc.report >= 6) lines.push("報告は厚い。中身が薄くても、共有済みの形は整う。");
+  else lines.push("報告は短い。現場は詳しいが、公式は一行になりやすい。");
   return lines;
 }
 
@@ -66,10 +63,9 @@ export function ThirtyExhibit() {
   return (
     <div>
       <p className="text-sm text-muted">
-        The window is thirty minutes. Change the split and the total stays. What changes is what
-        gets skipped, and what is left over.
+        枠は三十分。配分を変えても合計は変わらない。変わるのは、何が省略され、何が余るか。
       </p>
-      <p className="mt-4 font-display text-3xl tabular-nums text-paper">{total} min</p>
+      <p className="mt-4 font-display text-3xl tabular-nums text-paper">{total} 分</p>
       <div className="mt-4 space-y-4">
         {ITEMS.map((i) => (
           <label key={i.id} className="block">
@@ -95,10 +91,10 @@ export function ThirtyExhibit() {
           </li>
         ))}
       </ul>
-      <Prompt>Is the worker who finished early skilled? Whose time is the leftover twenty-five?</Prompt>
+      <Prompt>早く終わらせた職人は有能か。余った二十五分は、誰の時間か。</Prompt>
       <div className="mt-6">
         <Button type="button" variant="paper" onClick={() => mark("thirty", JSON.stringify(alloc))}>
-          Close this room
+          この室を閉じる
         </Button>
       </div>
     </div>
