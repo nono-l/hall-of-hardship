@@ -6,57 +6,37 @@ import { useVisitStore } from "@/lib/visit-store";
 const SCALE = [
   {
     n: 0,
-    label: "Field voice",
-    body: "You throw the breaker and the caps still hold charge. Backup is live and they still say “it’s off.” Ask once and you get “you looking down on me?” People still die every year.",
+    label: "現場の口",
+    body: "ブレーカー落としてもキャパが残ってる。予備系が生きてるのに「切った」と言い張る。確認したら「舐めてんのか」だ。毎年、死ぬ。",
   },
   {
     n: 25,
-    label: "Work note",
-    body: "Residual voltage and a live spare circuit after isolation. The crew on the tools waves the briefing off. Paper is unreadable. No reply. Electrocutions have not fallen.",
+    label: "作業メモ",
+    body: "遮断後も残電荷と予備回路あり。二次は説明を聞き流す。書類は読めない。返事がない。感電は減っていない。",
   },
   {
     n: 50,
-    label: "Internal report",
-    body: "Pre-work hazard briefing has not taken hold. Handoffs between parties leak. Similar incidents continue.",
+    label: "社内報告",
+    body: "作業前の危険箇所説明が十分に定着していない。関係者間の連絡に漏れがある。類似災害が継続している。",
   },
   {
     n: 75,
-    label: "Public brief",
-    body: "Most fatal shocks have an information-sharing deficiency around hazard points in the background. Awareness will be reinforced to prevent recurrence.",
+    label: "公表資料",
+    body: "感電死亡災害の多くは、危険箇所に関する情報共有の不足が背景にある。再発防止に向け周知を徹底する。",
   },
   {
     n: 100,
-    label: "Official one-liner",
-    body: "Information-sharing deficiency.",
+    label: "一行の公式",
+    body: "情報共有不足。",
   },
 ];
 
 const WHO = [
-  {
-    id: "analyst",
-    label: "The analyst",
-    hint: "It classifies. Causes fold into one. Next year’s paper can be written.",
-  },
-  {
-    id: "prime",
-    label: "Prime contractor",
-    hint: "A record of briefing remains. Even if it did not land, they can stand on “we shared it.”",
-  },
-  {
-    id: "second",
-    label: "Hands on the wire",
-    hint: "Mild words make a yeah-yeah harder to see.",
-  },
-  {
-    id: "client",
-    label: "The client",
-    hint: "The schedule holds. Blame becomes “communication on site.”",
-  },
-  {
-    id: "dead",
-    label: "The person on the line",
-    hint: "In every phrasing, residual voltage is still residual voltage.",
-  },
+  { id: "analyst", label: "分析する側", hint: "分類できる。原因は一つに畳める。翌年の資料が書ける。" },
+  { id: "prime", label: "一次", hint: "説明した記録が残る。伝わらなくても「共有した」側に立てる。" },
+  { id: "second", label: "手を動かす側", hint: "マイルドな語は、自分の「はいはい」を目立たなくする。" },
+  { id: "client", label: "発注", hint: "工程は守られ、責任の所在は現場のコミュニケーションになる。" },
+  { id: "dead", label: "当人", hint: "どの言い方でも、残電圧は残電圧のまま。" },
 ];
 
 export function WordsExhibit() {
@@ -68,13 +48,13 @@ export function WordsExhibit() {
   return (
     <div>
       <p className="text-sm text-muted">
-        Turn the knob and only the skin of the same facts gets thicker. Nothing is added inside.
+        つまみを動かすと、同じ事実の皮だけが厚くなる。中身は増えない。
       </p>
       <label className="mt-6 block">
         <div className="mb-2 flex justify-between text-xs text-subtle">
-          <span>Raw voice</span>
-          <span className="tabular-nums">Mildness {mild}</span>
-          <span>Official</span>
+          <span>生の口</span>
+          <span className="tabular-nums">マイルド {mild}</span>
+          <span>公式</span>
         </div>
         <input
           type="range"
@@ -90,7 +70,7 @@ export function WordsExhibit() {
         <p className="text-xs tracking-[0.18em] text-ink-soft">{current.label}</p>
         <p className="mt-3 font-display text-lg leading-relaxed">{current.body}</p>
       </article>
-      <p className="mt-8 text-sm text-muted">Who gets the most ease from this phrasing?</p>
+      <p className="mt-8 text-sm text-muted">この言い方で、いちばん楽になるのは誰か。</p>
       <div className="mt-3 flex flex-wrap gap-2">
         {WHO.map((w) => (
           <Chip key={w.id} active={who === w.id} onClick={() => setWho(w.id)}>
@@ -103,10 +83,10 @@ export function WordsExhibit() {
           {WHO.find((w) => w.id === who)?.hint}
         </p>
       )}
-      <Prompt>Is mildness kindness — or omission for the next report?</Prompt>
+      <Prompt>マイルドさは優しさか。それとも、次の資料のための省略か。</Prompt>
       <div className="mt-6">
-        <Button type="button" onClick={() => mark("words", who ?? "unset")} variant="paper">
-          Close this room
+        <Button type="button" onClick={() => mark("words", who ?? "未選択")} variant="paper">
+          この室を閉じる
         </Button>
       </div>
     </div>
