@@ -1,21 +1,21 @@
-# Hall of Hardship
+# 本当の苦労館
 
-Interactive exhibition about mild official language and what it conceals on electrical work sites.
+電気工事現場における、マイルドな公式表現と、その裏に畳まれるものを扱うインタラクティブ展示。
 
-Official reports often collapse residual voltage, unreadable faxes, yeah-yeah briefings, live backup circuits, and “finish today” into one phrase: **information-sharing deficiency**. This hall is a set of devices that peel that skin. There is no correct label.
+残電荷、読めないファックス、「はいはい」、生きている予備系、「今日中に」——これらが公式では **情報共有不足** の一行に畳まれる。この館は、その皮を剥がす装置の集まりである。正解のラベルは置かない。
 
-## Rooms
+## 展示室
 
-1. **Skin of Words** — mildness knob
-2. **Unreadable Paper** — degraded copies
-3. **Four Relays** — recast the chain
-4. **Camera Blind Spot** — picture vs circuit
-5. **Thirty Minutes** — time split
-6. **Nested Boxes** — who actually touches the line
-7. **Table of Testimony** — auto-generated official line
+1. **言葉の皮** — マイルドさのつまみ
+2. **読めない紙** — 劣化した控え
+3. **伝達の四人** — 配役を入れ替える
+4. **カメラの死角** — 映像と回路
+5. **三十分の使い方** — 時間の配分
+6. **何次の箱** — 実際に線へ触れるのは誰か
+7. **証言の机** — 自動生成される公式の一行
 
-Built as a TanStack Start app. This is not an indictment of one trade.
+TanStack Start アプリ。特定の職種を断罪する展示ではない。
 
-## Run
+## 実行
 
-This project is meant to run in the Grok App Builder preview (`npm run dev` on port 8080).
+Grok App Builder のプレビュー想定（`npm run dev`、ポート 8080）。
