@@ -8,39 +8,39 @@ import { cn } from "@/lib/utils";
 const VOICES = [
   {
     id: "analyst",
-    who: "The one who writes the numbers",
-    said: "Eighty percent of fatal shocks are an information-sharing deficiency around hazard points.",
-    hide: "Split the deficiency (paper, attitude, backup, time) and the brief will not stay one piece.",
+    who: "統計を書く人",
+    said: "感電死亡の八割は危険箇所の情報共有不足です。",
+    hide: "不足の中身（書類、態度、予備系、時間）を分解すると、資料が一本にならない。",
   },
   {
     id: "prime",
-    who: "Prime",
-    said: "We briefed. We handed over the procedure. After that it is a site problem.",
-    hide: "Whether the paper was readable is not in their score.",
+    who: "一次",
+    said: "説明はした。手順も渡した。あとは現場の問題だ。",
+    hide: "渡した紙が読めたかは、自分の成果指標に入っていない。",
   },
   {
     id: "hand",
-    who: "Hands on the tools",
-    said: "If I ask every little thing, the job dies. Same as always.",
-    hide: "“Same as always” breaks on whether backup is live.",
+    who: "手を動かす人",
+    said: "いちいち聞いてたら仕事にならん。いつもと同じだ。",
+    hide: "いつもと同じ、の前提が予備系の有無で崩れている。",
   },
   {
     id: "client",
-    who: "Client",
-    said: "Keep the outage window. Safety first — also today.",
-    hide: "Two firsts at once. The collision drops down the chain.",
+    who: "発注",
+    said: "停電枠は守ってほしい。安全は最優先だが今日中でもある。",
+    hide: "二つの最優先を同時に置いている。衝突の処理は下へ落ちる。",
   },
   {
     id: "remote",
-    who: "Remote check",
-    said: "On camera they were working. No particular anomaly.",
-    hide: "The design does not let an anomaly show.",
+    who: "遠隔確認",
+    said: "カメラでは作業中で、特段の異常は見られなかった。",
+    hide: "異常が見える設計になっていない。",
   },
   {
     id: "new",
-    who: "Just arrived",
-    said: "I got the paper. I do not know where it came from. I cannot read the name.",
-    hide: "Honesty does not sit with the official “briefed.”",
+    who: "着いたばかりの人",
+    said: "紙はもらった。どこから来たか分からない。名前も読めない。",
+    hide: "正直さが、公式の「周知済み」と両立しない。",
   },
 ];
 
@@ -55,15 +55,14 @@ export function TestimonyExhibit() {
   }
 
   const report = useMemo(() => {
-    if (pins.length === 0) return "(Pin a testimony and an official line writes itself.)";
-    return "The primary cause is considered to be an information-sharing deficiency regarding hazard points among the parties concerned. Awareness will be reinforced to prevent recurrence.";
+    if (pins.length === 0) return "（証言を選ぶと、公式の一行が自動で書かれる）";
+    return "本件は、関係者間における危険箇所の情報共有不足が主因と考えられる。再発防止として周知の徹底を図る。";
   }, [pins]);
 
   return (
     <div>
       <p className="text-sm text-muted">
-        The testimonies do not look like they contradict. Only the hiding-place differs. Pin
-        the side that is hiding, and the official sentence is generated.
+        証言は矛盾しないように見える。隠している場所だけが違う。隠している側をピン留めすると、公式文が生成される。
       </p>
       <div className="mt-5 space-y-3">
         {VOICES.map((v) => {
@@ -86,15 +85,15 @@ export function TestimonyExhibit() {
         })}
       </div>
       <article className="mt-6 rounded-2xl bg-paper p-5 text-ink paper-grain">
-        <p className="text-xs tracking-[0.18em] text-ink-soft">Auto-generated official report</p>
+        <p className="text-xs tracking-[0.18em] text-ink-soft">自動生成・公式報告</p>
         <p className="mt-3 font-display text-lg leading-relaxed">{report}</p>
         <p className="mt-4 text-xs text-stamp">
-          Select more and the official line still shortens. That is the job of mildness.
+          選んだ数が増えても、公式は短くなる。それがマイルドの仕事だ。
         </p>
       </article>
       {completed.length > 0 && (
         <section className="mt-8">
-          <p className="text-xs tracking-[0.16em] text-subtle">Your footprints (this device only)</p>
+          <p className="text-xs tracking-[0.16em] text-subtle">あなたの足跡（この端末だけ）</p>
           <ul className="mt-2 space-y-1 text-sm text-muted">
             {EXHIBITS.filter((e) => completed.includes(e.slug)).map((e) => (
               <li key={e.slug}>
@@ -105,12 +104,10 @@ export function TestimonyExhibit() {
           </ul>
         </section>
       )}
-      <Prompt>
-        A report that keeps everything is long. A short report eases someone. Which do you write?
-      </Prompt>
+      <Prompt>全部を残す報告は、長い。短い報告は、誰かを楽にする。あなたはどちらを書くか。</Prompt>
       <div className="mt-6">
         <Button type="button" variant="paper" onClick={() => mark("testimony", pins.join(","))}>
-          Count the hall as walked
+          館を一巡したことにする
         </Button>
       </div>
     </div>
