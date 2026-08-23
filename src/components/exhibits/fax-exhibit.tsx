@@ -5,20 +5,20 @@ import { useVisitStore } from "@/lib/visit-store";
 import { cn } from "@/lib/utils";
 
 const FRAGMENTS = [
-  { id: "a", look: "**SUB** BLDG *3", truth: "North substation, building 3", slot: "site" as const },
-  { id: "b", look: "T* *ro", truth: "Name is unreadable", slot: "name" as const },
-  { id: "c", look: "B*ckup  ISO*", truth: "Backup was not isolated", slot: "body" as const },
-  { id: "d", look: "East * plant", truth: "Copy from another site", slot: "site" as const },
-  { id: "e", look: "S* *", truth: "Signature from another job", slot: "name" as const },
-  { id: "f", look: "Restore today", truth: "Addendum, author unknown", slot: "body" as const },
+  { id: "a", look: "※※現※※第※棟", truth: "北変電 第3棟", slot: "site" as const },
+  { id: "b", look: "田※ ※郎", truth: "名前は判読不能", slot: "name" as const },
+  { id: "c", look: "予※系 切※済", truth: "予備系は切っていない", slot: "body" as const },
+  { id: "d", look: "東※ ※工場", truth: "別現場の控え", slot: "site" as const },
+  { id: "e", look: "佐※ ※", truth: "別件の署名", slot: "name" as const },
+  { id: "f", look: "本日中に復旧", truth: "誰が書いたか不明の追記", slot: "body" as const },
 ];
 
 const CHANNELS = [
-  { id: "fax", label: "Resend", result: "The same noise stacks another sheet. Share-count goes up." },
-  { id: "call", label: "Call", result: "No pickup. Callback is “later.” Nothing is on record." },
-  { id: "mail", label: "Email", result: "Read receipt fires. Confirmation of meaning does not." },
-  { id: "go", label: "Go look", result: "Time burns. Whether backup is live is only knowable there." },
-  { id: "leave", label: "Treat as received", result: "Officially shared. On site, nothing arrived." },
+  { id: "fax", label: "再送する", result: "同じノイズがもう一枚積まれる。共有回数は増える。" },
+  { id: "call", label: "電話する", result: "出ない。折り返しは「後で」。記録は残らない。" },
+  { id: "mail", label: "メールする", result: "既読はつく。内容の確認はつかない。" },
+  { id: "go", label: "現物を見に行く", result: "時間は溶ける。予備系の活きは、そこでしか分からない。" },
+  { id: "leave", label: "届いたことにする", result: "公式には共有済み。現場には何も届いていない。" },
 ];
 
 export function FaxExhibit() {
@@ -41,8 +41,7 @@ export function FaxExhibit() {
   return (
     <div>
       <p className="text-sm text-muted">
-        A degraded copy sits on the desk. Sender unknown. Pick three sheets and try to restore
-        site, name, and body.
+        劣化コピーが机にある。送信元は分からない。三枚を選んで、現場・名前・内容を復元してみる。
       </p>
       <button
         type="button"
@@ -51,7 +50,7 @@ export function FaxExhibit() {
         onPointerUp={() => setHeld(false)}
         onPointerLeave={() => setHeld(false)}
       >
-        Hold to develop
+        押し続けて現像する
       </button>
       <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3">
         {order.map((f) => {
@@ -66,22 +65,22 @@ export function FaxExhibit() {
                 on ? "border-stamp bg-paper text-ink" : "border-border bg-paper-deep/90 text-ink-soft",
               )}
             >
-              <span className="font-display text-base tracking-wide">{held ? f.truth : f.look}</span>
+              <span className="font-display text-base tracking-widest">
+                {held ? f.truth : f.look}
+              </span>
             </button>
           );
         })}
       </div>
-      <p className="mt-3 text-xs text-subtle">
-        Selected {picked.length}/3 — barely readable only while you hold.
-      </p>
+      <p className="mt-3 text-xs text-subtle">選択 {picked.length}/3 — 押している間だけ、わずかに読める。</p>
       {picked.length === 3 && (
         <p className="mt-4 rounded-xl border border-border bg-bg-elevated p-4 text-sm">
           {slotsOk
-            ? "Closest three. The name is still unreadable, and the backup line said the opposite of the truth."
-            : "You matched a set. It mixed another site and another signature. Winning memory-match is not being right."}
+            ? "いちばん近い三枚だ。それでも氏名は読めず、予備系の記述は事実と逆だった。"
+            : "揃えたつもりが、別現場と別署名が混ざっている。神経衰弱の勝ちは、正しさではない。"}
         </p>
       )}
-      <p className="mt-8 text-sm text-muted">Next move, after “checking.”</p>
+      <p className="mt-8 text-sm text-muted">確認の次の一手。</p>
       <div className="mt-3 flex flex-wrap gap-2">
         {CHANNELS.map((c) => (
           <Chip key={c.id} active={channel === c.id} onClick={() => setChannel(c.id)}>
@@ -94,10 +93,10 @@ export function FaxExhibit() {
           {CHANNELS.find((c) => c.id === channel)?.result}
         </p>
       )}
-      <Prompt>Who is a system for, if unreadable paper can count as “shared”?</Prompt>
+      <Prompt>読めない紙を「共有済み」にできる制度は、誰のための制度か。</Prompt>
       <div className="mt-6">
-        <Button type="button" variant="paper" onClick={() => mark("fax", channel ?? "untouched")}>
-          Close this room
+        <Button type="button" variant="paper" onClick={() => mark("fax", channel ?? "未操作")}>
+          この室を閉じる
         </Button>
       </div>
     </div>
