@@ -5,12 +5,12 @@ import { useVisitStore } from "@/lib/visit-store";
 import { cn } from "@/lib/utils";
 
 const BOXES = [
-  { id: "owner", label: "Client desk", readable: true, hand: false },
-  { id: "gc", label: "GC desk", readable: true, hand: false },
-  { id: "p1", label: "Prime desk", readable: true, hand: false },
-  { id: "p2a", label: "** Elec.", readable: false, hand: true },
-  { id: "p2b", label: "*wa *co", readable: false, hand: true },
-  { id: "p3", label: "(card is worn through)", readable: false, hand: true },
+  { id: "owner", label: "発注の机", readable: true, hand: false },
+  { id: "gc", label: "元請の机", readable: true, hand: false },
+  { id: "p1", label: "一次の机", readable: true, hand: false },
+  { id: "p2a", label: "※※電設", readable: false, hand: true },
+  { id: "p2b", label: "※和※業", readable: false, hand: true },
+  { id: "p3", label: "（名刺が擦れている）", readable: false, hand: true },
 ];
 
 export function LayersExhibit() {
@@ -22,8 +22,7 @@ export function LayersExhibit() {
   return (
     <div>
       <p className="text-sm text-muted">
-        One warning. Choose a desk. The less readable the name, the more likely those hands
-        actually touch the line.
+        警告文は一通。入れる机を選ぶ。名前が読めない机ほど、実際に線に触る可能性が高い。
       </p>
       <div className="mt-5 space-y-2">
         {BOXES.map((b, i) => (
@@ -42,42 +41,37 @@ export function LayersExhibit() {
                 : "border-border bg-bg-elevated text-fg",
             )}
           >
-            <span className={b.readable ? "" : "tracking-[0.2em] opacity-80"}>{b.label}</span>
-            <span className="text-xs text-subtle">{b.hand ? "hands" : "desk"}</span>
+            <span className={b.readable ? "" : "tracking-[0.3em] opacity-80"}>{b.label}</span>
+            <span className="text-xs text-subtle">{b.hand ? "手" : "机"}</span>
           </button>
         ))}
       </div>
       <div className="mt-6">
         <Button type="button" variant="paper" disabled={!target} onClick={() => setSent(true)}>
-          Set it on this desk
+          この机に置く
         </Button>
       </div>
       {sent && box && (
         <div className="mt-4 space-y-2 rounded-2xl border border-border bg-bg-elevated p-4 text-sm">
           {box.readable && !box.hand && (
             <p>
-              It reached a readable desk. A briefing record remains. The person who will touch
-              the wire lives in another box. The prime carries liability and does not carry the
-              hands.
+              読める机に届いた。説明の記録は残る。線に触る人は、別の箱の中にいる。一次は責任を負うが、手は持っていない。
             </p>
           )}
           {box.hand && (
             <p>
-              This is a desk for hands. The addressee is unreadable. You may have set it on the
-              next box over. A banned tier of subcontracting can change only the label on the
-              box.
+              手を動かす側の机だ。ただし宛名が読めない。置いたつもりが、隣の箱かもしれない。禁止された次数は、呼び方を変えれば箱のラベルだけが変わる。
             </p>
           )}
           <p className="text-muted">
-            Before “which tier,” whose fingers are near the terminal. Official classification
-            sometimes does not point at fingers.
+            何次か、より先に、誰の指が端子に近いか。公式の分類は、指の位置を指さないことがある。
           </p>
         </div>
       )}
-      <Prompt>Are the box of liability and the box of shock the same box?</Prompt>
+      <Prompt>責任の所在と、感電の所在は、同じ箱か。</Prompt>
       <div className="mt-6">
-        <Button type="button" variant="ghost" onClick={() => mark("layers", target ?? "unset")}>
-          Close this room
+        <Button type="button" variant="ghost" onClick={() => mark("layers", target ?? "未選択")}>
+          この室を閉じる
         </Button>
       </div>
     </div>
