@@ -13,10 +13,9 @@ function Hall() {
   const allDone = completed.length === EXHIBITS.length;
 
   return (
-    <MuseumShell title="The hall" backTo="/" backLabel="Back to the entrance">
+    <MuseumShell title="回廊" backTo="/" backLabel="玄関へ">
       <p className="text-sm leading-relaxed text-muted">
-        Seven devices. Touch them and you can see where official language is taking it easy.
-        You do not have to finish all of them. One is sometimes enough.
+        七つの装置。触ると、公式の語がどこで楽をしているかが見える。全部回らなくてもよい。一つで十分なこともある。
       </p>
       <ol className="mt-8 space-y-3">
         {EXHIBITS.map((e) => {
@@ -47,13 +46,12 @@ function Hall() {
       </ol>
       {allDone && (
         <p className="mt-8 rounded-2xl bg-paper p-5 font-display text-lg text-ink">
-          The official one-liner only works after throwing away the feel of seven rooms. Keep
-          the feel, and the report gets long.
+          公式の一行は、七室分の手触りを捨てて成立する。捨てずに残すなら、報告は長くなる。
         </p>
       )}
       <div className="mt-10">
         <Button type="button" variant="ghost" onClick={() => reset()}>
-          Erase footprints
+          足跡を消す
         </Button>
       </div>
     </MuseumShell>

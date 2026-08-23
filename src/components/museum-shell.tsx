@@ -9,7 +9,7 @@ export function MuseumShell({
   children,
   title,
   backTo = "/hall",
-  backLabel = "Back to the hall",
+  backLabel = "回廊へ",
 }: {
   children: ReactNode;
   title?: string;
@@ -33,8 +33,8 @@ export function MuseumShell({
             <ArrowLeft className="size-5" />
           </Link>
           <div className="min-w-0 flex-1">
-            <p className="font-display text-xs tracking-[0.2em] text-muted">Hall of Hardship</p>
-            <p className="truncate text-sm text-fg">{title ?? "Permanent exhibition"}</p>
+            <p className="font-display text-xs tracking-[0.2em] text-muted">本当の苦労館</p>
+            <p className="truncate text-sm text-fg">{title ?? "常設展示"}</p>
           </div>
           <p className="tabular-nums text-xs text-subtle">
             {completed.length}/{EXHIBITS.length}
@@ -49,7 +49,7 @@ export function MuseumShell({
 export function Prompt({ children }: { children: ReactNode }) {
   return (
     <aside className="mt-8 rounded-2xl border border-border bg-bg-elevated p-4 pl-5">
-      <p className="text-xs tracking-[0.16em] text-subtle">A question to sit with</p>
+      <p className="text-xs tracking-[0.16em] text-subtle">考えるための問い</p>
       <p className="mt-2 font-display text-base leading-snug text-paper">{children}</p>
     </aside>
   );

@@ -18,9 +18,9 @@
   --color-border: color-mix(in oklab, var(--color-fg) 12%, transparent);
   --color-border-strong: color-mix(in oklab, var(--color-fg) 22%, transparent);
 
-  --font-display: "Fraunces", "Times New Roman", serif;
-  --font-sans: "IBM Plex Sans", system-ui, sans-serif;
-  --font-mono: "IBM Plex Sans", ui-monospace, monospace;
+  --font-display: "Shippori Mincho", "Noto Serif JP", serif;
+  --font-sans: "IBM Plex Sans JP", "Noto Sans JP", system-ui, sans-serif;
+  --font-mono: "IBM Plex Sans JP", ui-monospace, monospace;
 
   --radius-xs: 4px;
   --radius-sm: 8px;

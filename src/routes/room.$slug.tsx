@@ -17,7 +17,7 @@ function RoomPage() {
 
   return (
     <MuseumShell title={`${meta.number} ${meta.title}`}>
-      <p className="text-xs tracking-[0.2em] text-official">Official phrase · {meta.official}</p>
+      <p className="text-xs tracking-[0.2em] text-official">公式の語 · {meta.official}</p>
       <h1 className="mt-2 font-display text-3xl">{meta.title}</h1>
       <p className="mt-2 text-sm text-muted">{meta.question}</p>
       <div className="mt-8">
@@ -27,12 +27,12 @@ function RoomPage() {
         {next ? (
           <Button asChild variant="paper">
             <Link to="/room/$slug" params={{ slug: next }}>
-              Next device
+              次の装置
             </Link>
           </Button>
         ) : (
           <Button asChild variant="paper">
-            <Link to="/hall">Return to the hall</Link>
+            <Link to="/hall">回廊に戻る</Link>
           </Button>
         )}
       </div>
