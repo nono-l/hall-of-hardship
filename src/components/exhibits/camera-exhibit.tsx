@@ -5,12 +5,12 @@ import { useVisitStore } from "@/lib/visit-store";
 import { cn } from "@/lib/utils";
 
 const CHECKS = [
-  { id: "pose", label: "A person is in front of the panel", camera: true, volt: false },
-  { id: "ppe", label: "Looks like PPE is on", camera: true, volt: false },
-  { id: "open", label: "The door is open", camera: true, volt: false },
-  { id: "backup", label: "Backup circuit is energized", camera: false, volt: true },
-  { id: "cap", label: "Capacitors still hold charge", camera: false, volt: true },
-  { id: "earth", label: "Grounding is not made", camera: false, volt: true },
+  { id: "pose", label: "人が盤の前にいる", camera: true, volt: false },
+  { id: "ppe", label: "保護具を着けているように見える", camera: true, volt: false },
+  { id: "open", label: "扉が開いている", camera: true, volt: false },
+  { id: "backup", label: "予備系が充電されている", camera: false, volt: true },
+  { id: "cap", label: "コンデンサに残電荷がある", camera: false, volt: true },
+  { id: "earth", label: "接地が取れていない", camera: false, volt: true },
 ];
 
 export function CameraExhibit() {
@@ -24,7 +24,7 @@ export function CameraExhibit() {
   return (
     <div>
       <p className="text-sm text-muted">
-        Left is the remote picture. Right is the electrical state. Same minute, different world.
+        左は遠隔の画。右は電気の状態。同じ時刻の、違う世界。
       </p>
       <div className="mt-4 grid gap-3 sm:grid-cols-2">
         <figure className="rounded-2xl border border-border bg-bg-subtle p-4">
@@ -46,10 +46,10 @@ export function CameraExhibit() {
               </>
             )}
           </svg>
-          <figcaption className="mt-2 text-xs text-subtle">Site camera 12:04</figcaption>
+          <figcaption className="mt-2 text-xs text-subtle">現場カメラ 12:04</figcaption>
         </figure>
         <div className="rounded-2xl border border-border bg-bg-elevated p-4">
-          <p className="text-xs tracking-[0.16em] text-subtle">Visible right now</p>
+          <p className="text-xs tracking-[0.16em] text-subtle">いま見えている項目</p>
           <ul className="mt-3 space-y-2">
             {visible.map((c) => (
               <li key={c.id} className="flex items-start gap-2 text-sm">
@@ -63,9 +63,9 @@ export function CameraExhibit() {
       <div className="mt-4 grid grid-cols-3 gap-2">
         {(
           [
-            ["cam", "Camera only"],
-            ["volt", "Electrical eye"],
-            ["both", "Overlay"],
+            ["cam", "カメラだけ"],
+            ["volt", "電気の目"],
+            ["both", "重ねる"],
           ] as const
         ).map(([id, label]) => (
           <button
@@ -83,20 +83,20 @@ export function CameraExhibit() {
       </div>
       <div className="mt-6">
         <Button type="button" variant="official" onClick={() => setReport(true)}>
-          Write remote check: no issue
+          遠隔確認：問題なし、と書く
         </Button>
       </div>
       {report && (
         <p className="mt-4 rounded-xl bg-paper p-4 text-sm text-ink">
           {layer === "volt" || layer === "both"
-            ? "With the electrical eye on, “no issue” will not write. It only writes on camera-only."
-            : "The picture proves a person at work. It does not prove the panel is dead. Officially, remote support happened."}
+            ? "電気の目がある状態で「問題なし」は書けない。書けるのは、カメラだけのときだ。"
+            : "画は作業中の人を証明する。盤が死んでいることは証明しない。公式には後方支援済み。"}
         </p>
       )}
-      <Prompt>Is remote presence evidence of a body — or of a circuit?</Prompt>
+      <Prompt>遠隔臨場は、人の位置の証拠か。回路の証拠か。</Prompt>
       <div className="mt-6">
         <Button type="button" variant="ghost" onClick={() => mark("camera", layer)}>
-          Close this room
+          この室を閉じる
         </Button>
       </div>
     </div>
